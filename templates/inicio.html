@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practicando</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <!-- referencia a javascript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <!-- cabecera -->
+    <div class="container">
+        <div class="well text-center">
+            <h1>Crud Python Claudio</h1>
+        </div>
+    </div>
+
+    <!-- contenido  -->
+    <div class="container">
+        <h2>Lista
+            <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal">
+                Agregar Usuario
+            </button>
+        </h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for user in users %}
+                <tr>
+                    <td>{{ user.0}}</td>
+                    <td>{{ user.1}}</td>
+                    <td>{{ user.2}}</td>
+                    <td>
+                        <a href="/edit" data-toggle="modal" data-target="#myModal">Edit</a>
+                        <a href="/delete/{{ user.0}}" data-toggle="modal" data-target="#myModal">Delete</a>
+                            
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Ventana modal para insertar -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nuevo Usuario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/insert" method="POST">
+                        <div class="form-group">
+                            <!-- <label>Id:</label> -->
+                            <input type="hidden" class="form-control" name="id">
+                        </div>
+                        <div class="form-group">
+                            <label>Nombre:</label>
+                            <input type="text" class="form-control" name="nombre">
+                        </div>
+                        <div class="form-group">
+                            <label>Correo:</label>
+                            <input type="text" class="form-control" name="correo">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                        <button type="submit" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+</html>
